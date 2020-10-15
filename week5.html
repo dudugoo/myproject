@@ -180,6 +180,63 @@ y&lt;-c(1,2)
 x+y</code></pre>
 <pre><code>## Warning in x + y: 較長的物件長度並非較短物件長度的倍數</code></pre>
 <pre><code>## [1] 2 4 4 6 6 8 8</code></pre>
+<p>x[n]表要第n個數;x[-n]表不要第n個數</p>
+<pre class="r"><code>x&lt;-c(1,4,2,8,9,3,5)
+x[1]</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>x[2]</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>x[-3]</code></pre>
+<pre><code>## [1] 1 4 8 9 3 5</code></pre>
+<pre class="r"><code>x[0]</code></pre>
+<pre><code>## numeric(0)</code></pre>
+<pre class="r"><code>x[8]</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>“|”為或，“&amp;”為且</p>
+<pre class="r"><code>x1&lt;-c(T,T,F,F)
+x2&lt;-c(T,F,T,F)
+x1|x2</code></pre>
+<pre><code>## [1]  TRUE  TRUE  TRUE FALSE</code></pre>
+<pre class="r"><code>x1&amp;x2</code></pre>
+<pre><code>## [1]  TRUE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code>x&lt;-c(11,3,5,2,56,87)
+x</code></pre>
+<pre><code>## [1] 11  3  5  2 56 87</code></pre>
+<pre class="r"><code>x[3]</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>index&lt;-c(1,3,5,8)
+x[index]</code></pre>
+<pre><code>## [1] 11  5 56 NA</code></pre>
+<pre class="r"><code>x[c(1,3,5,7)]</code></pre>
+<pre><code>## [1] 11  5 56 NA</code></pre>
+<pre class="r"><code>x[-2]</code></pre>
+<pre><code>## [1] 11  5  2 56 87</code></pre>
+<pre class="r"><code>length(x)</code></pre>
+<pre><code>## [1] 6</code></pre>
+<pre class="r"><code>x&lt;-1:7
+x</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7</code></pre>
+<pre class="r"><code>y&lt;-2:-2
+y</code></pre>
+<pre><code>## [1]  2  1  0 -1 -2</code></pre>
+<pre class="r"><code>Z&lt;--2:2
+Z</code></pre>
+<pre><code>## [1] -2 -1  0  1  2</code></pre>
+<pre class="r"><code>x&lt;-seq(0,1,by=0.2)
+x</code></pre>
+<pre><code>## [1] 0.0 0.2 0.4 0.6 0.8 1.0</code></pre>
+<pre class="r"><code>y&lt;-seq(0,2,by=0.3)
+y</code></pre>
+<pre><code>## [1] 0.0 0.3 0.6 0.9 1.2 1.5 1.8</code></pre>
+<pre class="r"><code>y&lt;-seq(0,2,by=0.3)
+y[2]</code></pre>
+<pre><code>## [1] 0.3</code></pre>
+<pre class="r"><code>z&lt;-seq(0,7,by=1)
+z[-4]</code></pre>
+<pre><code>## [1] 0 1 2 4 5 6 7</code></pre>
+<div id="2.8.12.8.2" class="section level3">
+<h3>回家預習教學平台講義2.8.1與2.8.2</h3>
+</div>
 </div>
 </div>
 
