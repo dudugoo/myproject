@@ -1,0 +1,110 @@
+---
+title: "week5"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#符號用法  
+  
+- Apple  
+- Banana  
+- Candy  
+  
+1. Apple  
+1. Banana  
+1. Candy  
+
+##統計量  
+c()是一個函數,用來形成一個向量變數
+```{r}
+x<-c(2,3,7,7,4,5,5,9,2,5,8)
+mean(x)
+median(x)
+var(x)
+quantile(x)
+sd(x)
+fivenum(x)
+min(x)
+max(x)
+range(x)
+```
+
+
+```{r}
+x<-runif(40)
+length(x)
+```
+
+```{r}
+x<-c(1,2,3)
+y<-2
+x+y
+```
+
+
+```{r}
+x<-c(1,2,3,4)
+y<-c(1,2)
+x+y
+```
+```{r}
+x<-c(1,2,3,4,5,6,7)
+y<-c(1,2)
+x+y
+```
+x[n]表要第n個數;x[-n]表不要第n個數
+```{r}
+x<-c(1,4,2,8,9,3,5)
+x[1]
+x[2]
+x[-3]
+x[0]
+x[8]
+```
+"|"為或，"&"為且
+```{r}
+x1<-c(T,T,F,F)
+x2<-c(T,F,T,F)
+x1|x2
+x1&x2
+```
+
+```{r}
+x<-c(11,3,5,2,56,87)
+x
+x[3]
+
+index<-c(1,3,5,8)
+x[index]
+
+x[c(1,3,5,7)]
+x[-2]
+length(x)
+```
+
+```{r}
+x<-1:7
+x
+y<-2:-2
+y
+Z<--2:2
+Z
+```
+```{r}
+x<-seq(0,1,by=0.2)
+x
+
+y<-seq(0,2,by=0.3)
+y
+
+y<-seq(0,2,by=0.3)
+y[2]
+
+```
+
+
+
+
+
