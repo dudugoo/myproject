@@ -1,0 +1,43 @@
+---
+title: "week6"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#1.隨機產生1到300的號碼,共200
+```{r}
+index1<-as.integer(runif(200)*300)+1
+```
+
+#2.隨機產生1到300的號碼,共300
+```{r}
+index2<-as.integer(runif(300)*300)+1
+```
+
+#3.產生亂數300個
+```{r}
+meta<-rnorm(300,5,2)
+hist(meta)
+```
+
+#4.抽樣本100個(縮寫s=sample)(conf=信賴區間)
+```{r}
+idx<-as.integer(runif(100)*300)+1
+s<-meta[idx]
+s.sum<-summary(s)
+hist(s)
+s.mean<-s.sum[4]
+s.sd<-sd(s)/sqrt(300)
+print("sample mean")
+print(s.mean)
+print("sample sd")
+print(s.sd)
+
+s.conf<-c(-1.96*s.sd,1.96*s.sd)+s.mean
+print("sample conf")
+print(s.conf)
+```
+
