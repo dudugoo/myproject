@@ -7,7 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+
 
 ```{r}
 N<-100
@@ -18,4 +18,49 @@ for (i in 1:1000) {
   smp<-metasample[rndno]
   bmu[i]<-mean(smp)
 }
+p<-density(bmu)
+plot(p)
 ```
+```{r}
+N<-300
+metasample<-rnorm(N,5,2)
+bmu<-numeric(1000)
+for (i in 1:1000) {
+  rndno<-as.integer(runif(N)*N)+1
+  smp<-metasample[rndno]
+  bmu[i]<-mean(smp)
+}
+p<-density(bmu)
+plot(p)
+```
+
+
+```{r}
+N<-500
+metasample<-rnorm(N,5,2)
+bmu<-numeric(1000)
+for (i in 1:1000) {
+  rndno<-as.integer(runif(N)*N)+1
+  smp<-metasample[rndno]
+  bmu[i]<-mean(smp)
+}
+p<-density(bmu)
+plot(p)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
