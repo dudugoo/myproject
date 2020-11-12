@@ -1,0 +1,52 @@
+---
+title: "week8"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+x<-rnorm(400,5,2)
+h<-hist(x,breaks=20,probability=T,col="red",
+        xlab="Miles Per Gallon",main="title")
+dx<-seq(-0,10,length=40)
+dy<-dnorm(dx,5,2)
+lines(dx,dy,t="l",col="red")
+```
+
+```{r}
+N<-400
+sm<-5
+ss<-2
+data<-rnorm(N,sm,ss)
+h<-hist(x,breaks=20,probability=T,col="red",
+        xlab="Miles Per Gallon",main="title")
+dx<-seq(sm-ss*3,sm+ss*3,length=40)
+dy<-dnorm(dx,sm,ss)
+lines(dx,dy,t="l",col="red")
+```
+
+```{r}
+N<-4
+sm<-5
+ss<-2
+n<-300
+ee<-double(n)
+for (i in 1:n){
+  data<-rnorm(N,sm,ss)
+  ee[i]<-mean(data)
+}
+```
+```{r}
+h<-hist(x,breaks=20,probability=T,col="red",
+        xlab="Miles Per Gallon",main="title")
+dx<-seq(sm-ss*3,sm+ss*3,length=40)
+dy<-dnorm(dx,sm,ss)
+lines(dx,dy,t="l",col="red")
+qx<-quantile(ee)
+rug(qx)
+
+# 抽樣分配ee的=ss/sqrt(N)
+```
