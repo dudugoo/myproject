@@ -48,5 +48,5 @@ lines(dx,dy,t="l",col="red")
 qx<-quantile(ee)
 rug(qx)
 
-# ©â¼Ë¤À°teeªº=ss/sqrt(N)
+# æŠ½æ¨£åˆ†é…eeçš„=ss/sqrt(N)
 ```
