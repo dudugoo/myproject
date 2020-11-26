@@ -11,6 +11,13 @@ mm<-function(rcnt,ccnt,init){
   rst<-matrix(v,rcnt,ccnt)
   return(rst)
 }
+```
 
+```{r}
 mm(2,3,7)
 ```
+
+
+
+
+
