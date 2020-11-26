@@ -1,0 +1,16 @@
+---
+title: "week11"
+output: html_document
+---
+
+```{r}
+mm<-function(rcnt,ccnt,init){
+  total<-rcnt*ccnt
+  v<-double(total)
+  v[1:total]<-init
+  rst<-matrix(v,rcnt,ccnt)
+  return(rst)
+}
+
+mm(2,3,7)
+```
