@@ -17,6 +17,98 @@ mm<-function(rcnt,ccnt,init){
 mm(2,3,7)
 ```
 
+question1:下面3個向量組成list
+```{r}
+x1<-runif(3)
+x2<-runif(3)
+x3<-runif(3)
+x<-list(x1,x2,x3)
+##length(x)=3個
+x
+xx<-c(x1,x2,x3)
+##length(x)=9個
+xx
+```
+
+question2(法一):計算裡面元素大於0.5
+```{r}
+xx<-function(x){
+  if(is.vector(x))
+    return(x[x>0.5])
+}
+#xx為方程式f的意思，故需要輸入變數，在此選runif(5)
+xx(runif(5))
+```
+
+question2(法二):計算裡面元素大於0.5
+```{r}
+xx<-function(x){
+  
+    return(length(x[x>0.5]))
+}
+xx(runif(10))
+typeof(runif(10))
+
+y<-list(c(1,2,3),c(1,2,3))
+typeof(y)
+xx(y)
+#list無法用此方式數個數
+```
+
+```{r}
+#print是直接原文輸出
+#cat是先理解後再輸出
+print("abkwlfkelwm lwkfe  woi wwomdslk")
+print("abkwlfkelwm\nlwkfe\nwoi\nwwomdslk")
+cat("abkwlfkelwm\nlwkfe\nwoi\nwwomdslk")
+
+print("abc\nde")
+cat("abc\nde")
+
+cat("x1\tx2")
+```
+
+```{r}
+x1<-list(c("a","b"),c("c","d"))
+x<-x1[1]
+x
+y<-x1[[1]]
+y
+```
+
+```{r}
+x1<-list(c("a","b"),c("c","d"))
+x<-x1[[1]]
+typeof(x)
+for(item in x){
+  print(item)
+}
+#上式為重複跑不只一次之結果
+print("--我--是--分--隔--線--")
+#下式為僅跑一次之結果
+x<-x1[1]
+typeof(x)
+for(item in x){
+  print(item)
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
