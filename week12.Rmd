@@ -7,3 +7,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+fert<-c(10,20,20,50,10,20,10,50,20)
+fert<-factor(fert)
+fert
+table(fert)
+```
+
