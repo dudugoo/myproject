@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-##git push https://帳號:密碼@github.com/dudugoo/myproject.git
+- git push https://帳號:密碼@github.com/dudugoo/myproject.git
 
 
 
@@ -21,18 +21,45 @@ table(fert)
 
 ```{r}
 #辨別文字格式的三種常用語法
-str()
-attributes()
-typeof()
+#str()
+#attributes()
+#typeof()
 ```
 
 ```{r}
 mydata<-read.csv("trees91.csv")
 x<-factor(mydata$C)
 table(x)
+
 mydata$C<-x
 table(mydata$C)
 ```
+
+```{r}
+mydata1<-read.csv("trees91n.csv",encoding="UTF-8")
+mydata1$`中文` <-factor(mydata1$`中文`)
+table(mydata1$`中文`)
+```
+
+```{r}
+paste0("a","b")   #"a"+"b" = "a"`sep`"b" ,sep=""無空格
+paste0("a","b",collapse="-----")
+paste0(c("a","b"),c(1,2))
+paste0(c("a","b"),c("1","2"))
+paste0(c("a","b"),c(1,2),collapse="-----")
+paste0(c("a","b"),c(1,2),c("c","d"))
+paste0(c("a","b"),c("1","2"),c("c","d"))
+paste0(c("a","b"),c(1,2),c("c","d"),collapse="-----")
+paste0(c("a","b","c"),c(1,2),c("d","e","f"),collapse="-----")
+print("--------------------")
+paste("a","b")   #"a"+"b" = "a"`sep`"b"  ,sep" "有空格
+```
+
+- paste0 是 paste的簡化版，paste裡面的參數sep預設為""
+- paste() ==paste( ,sep="")
+
+
+
 
 
 
