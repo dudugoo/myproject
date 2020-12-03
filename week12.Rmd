@@ -7,6 +7,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+##git push https://帳號:密碼@github.com/dudugoo/myproject.git
+
+
+
 ```{r}
 fert<-c(10,20,20,50,10,20,10,50,20)
 fert<-factor(fert)
@@ -15,9 +20,19 @@ table(fert)
 ```
 
 ```{r}
-#kk
+#辨別文字格式的三種常用語法
+str()
+attributes()
+typeof()
 ```
 
+```{r}
+mydata<-read.csv("trees91.csv")
+x<-factor(mydata$C)
+table(x)
+mydata$C<-x
+table(mydata$C)
+```
 
 
 
