@@ -1,0 +1,20 @@
+---
+title: "dataset test"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## practice
+
+寫一個函數,要知道我們要的資料是不是已經內建
+例如:iris是不是內建資料
+function isDsExists(dsname) return T,F
+
+```{r}
+dn<-data()
+str(dn)
+```
+
