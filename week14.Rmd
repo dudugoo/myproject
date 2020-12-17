@@ -1,0 +1,157 @@
+---
+title: "week14"
+output: html_document
+---
+
+#用tempfile()或tempdir()是在找資料位置,其所跑出來的網址,須把"//"改成"/"才能使用(進行搜尋)喔
+
+```{r}
+cat("x\nx") 
+#出來為x
+#      x
+
+cat("x\\n") 
+#出來為x\nx
+
+print("x\n")
+#出來為x\nx
+```
+
+```{r}
+list.files(system.file(package="stats"))
+length(list.files(system.file(package="stats")))
+#共有幾個檔案
+```
+file.path(tempdir(),"xxx")
+
+
+(一)
+```{r}
+x<-read.csv(file="C:/temp/myproject/wh.csv", header=T, comment.char = "#", as.is=T)
+str(x)
+View(x)
+
+x$weight<-as.numeric(x$weight)
+x$ratio<-x$height/x$weight
+x$ratio
+```
+
+```{r}
+library(DT)
+fm<-read.csv(file="C:/temp/myproject/wh.csv", header=T, comment.char = "#", as.is=T)
+fm$weight<-as.numeric(fm$weight)
+
+##Warning:強制變更過程中產生了NA
+
+fm$ratio<-fm$height/fm$weight
+datatable(fm, rownames = F)
+```
+
+
+#把欄位改成中文(colname to chinese)
+(二)
+str(fm)
+rownames(fm)
+```{r}
+#失敗版
+colnames(fm)<-"身高,體重,性別,比例"
+datatable(rownames=F,fm)
+```
+
+```{r}
+#成功版
+colnames(fm)<-c("身高","體重","性別","比例")
+datatable(fm, rownames=F)
+```
+
+```{r}
+#建立新檔案的語法
+#write tz csv
+write.csv(fm,file="C:/temp/myproject/foo.csv", row.names = F)
+
+#raed tz csv
+fm2<-read.csv(file="C:/temp/myproject/foo.csv")
+fm2
+```
+
+```{r}
+#真正沒問題的讀法
+fm3<-read.csv(file="C:/temp/myproject/wh_chinese.csv", header = T, comment.char = "#", fileEncoding = "UTF-8")
+fm3
+```
+
+
+```{r}
+library(DT)
+ms<-installed.packages()
+View(ms)
+datatable(ms)
+
+fm<-data.frame(ms)
+fm2<-fm[,1:3]
+```
+
+
+(三)
+```{r}
+ms<-installed.packages()
+fm<-data.frame(ms)
+
+#(欲叫出前三行)解1
+col1<-fm$Package
+col2<-fm$LibPath
+col3<-fm$Version
+fm3<-data.frame(col1,col2,col3)
+
+#(欲叫出前三行)解2
+fm3<-fm[,1:3]
+names(fm3)
+```
+
+```{r}
+library(DT)
+ms<-installed.packages()
+View(ms)
+fm<-data.frame(ms)
+fm2<-fm[,1:3]
+colnames(fm2)<-c("套件","路徑","版本")
+datatable(fm2,rownames = F)
+write.csv(fm2, file="C:/temp/myproject/foo.csv", row.names = F)
+```
+
+```{r}
+fm4<-read.csv(file="C:/temp/myproject/foo.csv")
+datatable(fm4)
+```
+
+```{r}
+fm5<-fm4[order(fm4$`版本`),]
+datatable(fm4)
+```
+
+
+```{r}
+#將數列中的數由小到大排列
+#order排序出來的是項數
+x1=c(3,2,1)
+order(x1)
+y1<-x1[order(x1)]
+
+x2=c(5,8,3)
+order(x2)
+y2<-x2[order(x2)]
+```
+
+```{r}
+matrix(c(1,2,9,3,5,9,1,2),2,4)
+mm<-matrix(c(1,2,9,3,5,9,1,2),2,4)
+
+order(mm)
+
+mm[order(mm[,2])]
+mm[1]
+mm[2]
+mm[3]
+mm[4]
+```
+
