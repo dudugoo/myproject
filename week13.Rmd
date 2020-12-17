@@ -7,14 +7,142 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## practice
+## 1.practice
 
 寫一個函數,要知道我們要的資料是不是已經內建
 例如:iris是不是內建資料
 function isDsExists(dsname) return T,F
 
+常用分析物件的指令
+typeof, class, `str`, `attributes`
+
 ```{r}
 dn<-data()
 str(dn)
 ```
+
+```{r}
+attributes(dn)
+```
+
+```{r}
+dn$results
+class(dn$results)
+```
+
+```{r}
+dimnames(dn$results)
+class(dn$results)
+dsname<-dn$results[,"Item"] # 亦可dsname<-dn$results[,3]
+head(dsname,10)
+```
+### note
+要知道前10筆資料為哪些:head(xxx,10)  PS.全列就直接打head(xxx)
+要知道後10筆資料為哪些:tail(xxx,10)  PS.全列就直接打tail(xxx)
+
+
+```{r}
+oo<-dn$results
+oo[,3]
+```
+
+## not in function(prior function)
+```{r}
+head(dsname,10)
+
+uname<-"BOD"
+dsname==uname
+length(dsname[dsname==uname])
+length(dsname[dsname=="xxx"])
+```
+
+
+
+```{r}
+#解一
+isDsExists<-function(given){
+  dn<-data()
+  dsname<-dn$results[,"Item"] # 亦可dsname<-dn$results[,3]
+  rst<-length(dsname[dsname==given])
+  if(rst!=0){
+    return(TRUE)
+  }
+  else{
+    return(FALSE)
+  }
+}
+
+isDsExists("iris")
+isDsExists("BOD")
+isDsExists("xxx")
+```
+
+```{r}
+#解二
+isDsExists2<-function(given){
+  dn<-data()
+  dsname<-dn$results[,"Item"] # 亦可dsname<-dn$results[,3]
+  return(any(dsname==given))
+
+}
+isDsExists("iris")
+isDsExists("BOD")
+isDsExists("xxx")
+```
+## 最後將isDsExists做成程式包:
+(1) 先建立記事本
+(2) 右鍵點Edit with Noptepad++,將下方語法貼入即可
+isDsExists<-function(given){
+  dn<-data()
+  dsname<-dn$results[,"Item"] # 亦可dsname<-dn$results[,3]
+  rst<-length(dsname[dsname==given])
+  if(rst!=0){
+    return(TRUE)
+  }
+  else{
+    return(FALSE)
+  }
+}
+(3) 存成isDsExists.R
+(4) 欲使用語法時,就使用source("isDsExists.R")喚回
+
+
+## 2.先執行install.packages("DT"),下載DT程式包
+```{r}
+library(DT) # 喚醒DT程式
+datatable(cars)  #將cars製作成表格
+```
+
+```{r}
+dn<-data()
+dsname<-dn$results[,3]
+df<-data.frame(dsname) 
+# 因為dn$results[,3]為一行的數字表格,所以使用data.frame(dsname)使其變成至少兩行的表格,如此才能使用datatable語法
+datatable(df)
+```
+
+```{r}
+#製作表格按鈕,可參考:https://rstudio.github.io/DT/003-tabletools-buttons.html
+#google搜尋:r language datatable button
+dn<-data()
+dsname<-dn$results[,3]
+df<-data.frame(dsname) 
+datatable(df, extensions = 'Buttons', options = list(
+    dom = 'Bfrtip',
+    buttons = 
+      list('copy', 'print', list(
+        extend = 'collection',
+        buttons = c('csv', 'excel', 'pdf'),
+        text = 'Download'
+      ))
+    )
+)
+#不知道為何excel的選項出不來
+```
+
+
+### note
+要知道資料及裡面有什麼欄位:names()
+要知道前10筆資料為哪些:head()
+要知道後10筆資料為哪些:tail()
 
