@@ -7,3 +7,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+library("AER")
+data("Journals", package = "AER")
+jounals<-Journals[, c("subs", "price")]
+jounals$citeprice<-Journals$price/Journals$citations
+lm(jounals$subs~jounals$citeprice)
+lm(subs~citeprice,data=jounals)
+```
+
