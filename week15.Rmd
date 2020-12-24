@@ -8,11 +8,142 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-library("AER")
-data("Journals", package = "AER")
-jounals<-Journals[, c("subs", "price")]
-jounals$citeprice<-Journals$price/Journals$citations
-lm(jounals$subs~jounals$citeprice)
-lm(subs~citeprice,data=jounals)
+Journals<-read.csv("Journals.csv")
+#先讀取Journals.csv檔案
+
+#library("AER")
+#data("Journals", package = "AER")
+journals<-Journals[, c("subs", "price")]
+journals$citeprice<-Journals$price/Journals$citations
+
+#解一:lm(jounals$subs~jounals$citeprice)
+lm(journals$subs~journals$citeprice)
+#解二:lm(subs~citeprice,data=jounals)
+mm<-lm(subs~citeprice, data=journals)
+
+mm
+class(mm)
+names(mm)
+str(mm)
+mm$rank
+mm$coefficients
+mm$model
+str(mm$model)
 ```
+
+```{r}
+plot(log(subs) ~ log(citeprice) , data = journals)
+```
+
+```{r}
+#未取自然對數
+mm<-lm(subs~citeprice, data=journals)
+plot(mm)
+```
+
+```{r}
+#取自然對數
+mm<-lm(log(subs)~log(citeprice), data=journals)
+plot(mm)
+
+#Q-Q plot要成一直線,才是常態分配
+```
+
+```{r}
+#取自然對數
+mm<-lm(log(subs)~log(citeprice), data=journals)
+plot(mm)
+
+abline(mm)
+```
+
+```{r}
+plot(log(subs)~log(citeprice), data=journals)
+jour_lm<-lm(log(subs)~log(citeprice), data=journals)
+abline(jour_lm)
+```
+
+## 在Stata程式中,可輸入regress price mpg,會跑出舒服的圖表
+
+```{r}
+summary(jour_lm)
+#裡面有Coefficients相關係數,Estimate Std估計值等等
+```
+
+```{r}
+#整理
+library("AER")
+Journals<-read.csv("Journals.csv")
+journals<-Journals[, c("subs", "price")]
+journals$citeprice<-Journals$price/Journals$citations
+journals$lsubs<-log(journals$subs)
+journals$lciteprice<-log(journals$citeprice)
+
+plot(lsubs ~ lciteprice, data = journals)
+jour_lm<-lm(lsubs~lciteprice, data=journals)
+abline(jour_lm)
+
+anova(jour_lm)
+
+linearHypothesis(jour_lm, "lciteprice = -0.5")
+#先用library("AER")喚回AER,才能使用linearHypothesis語法
+```
+
+```{r}
+coef(jour_lm)
+confint(jour_lm, level = 0.95)
+```
+
+```{r}
+#一筆數據
+predict(jour_lm, newdata = data.frame(lciteprice = 2.11), interval = "confidence")
+predict(jour_lm, newdata = data.frame(lciteprice = 2.11), interval = "prediction")
+
+#兩筆數據
+predict(jour_lm, newdata = data.frame(lciteprice =  c(2.11,3)), interval = "confidence")
+predict(jour_lm, newdata = data.frame(lciteprice =  c(2.11,3)), interval = "prediction")
+
+#兩筆數據
+predict(jour_lm, newdata = data.frame(lciteprice =  c(2.11,3)), interval = "confidence")
+x<-predict(jour_lm, newdata = data.frame(lciteprice =  c(2.11,3)), interval = "prediction")
+
+x
+str(x)
+names(cars)
+summary(cars)
+```
+
+```{r}
+mydata <- seq(from = -4, to = 2, by = 0.25)
+jour_pred <- predict(jour_lm, interval = "prediction",
+  newdata = data.frame(lciteprice = mydata))  
+plot(lsubs ~ lciteprice, data = journals)
+lines(jour_pred[, 1] ~ mydata, col = 1)    
+lines(jour_pred[, 2] ~ mydata, col = 1, lty = 2)
+lines(jour_pred[, 3] ~ mydata, col = 1, lty = 2)
+```
+
+```{r}
+od<-10*runif(1000)
+hist(od)
+
+td<-log(od)
+hist(td)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
