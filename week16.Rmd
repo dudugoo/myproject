@@ -7,3 +7,169 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+#老師網頁：暫時>chapter6
+
+```{r}
+#iris蝴蝶花指令
+data(iris)
+summary(iris)
+levels(iris$Species)
+table(iris$species)
+iris$Petal.Length
+```
+
+```{r}
+rep(50,3)
+rep(c("1","2","3"),4)
+rep(c("1","2","3"),c("50","50","50"))
+rep(c("1","2","3"),rep(50,3))
+rep(c("1","2","3"),50)
+rep("1",50)
+rep("2",50)
+c(rep("1",50),rep("2",50))
+```
+
+```{r}
+iris.lab<-rep(c("1","2","3"),rep(50,3))
+str(iris)
+class(iris)
+attributes(iris)
+tail(iris)
+```
+
+```{r}
+data(PlantGrowth)
+attach(PlantGrowth)
+#欲取消PlantGrowth,就使用detach(PlantGrowth)
+head(PlantGrowth)
+attributes(PlantGrowth)
+length(PlantGrowth)
+
+length(group)
+
+weight
+group
+
+boxplot(weight~group)
+stripchart(weight~group)
+plot(weight,group)
+
+par(mfrow=c(1,2))
+stripchart(weight~group)
+plot(weight,group)
+dotchart(weight)
+```
+
+```{r}
+library(MASS)
+data(Cars93)
+View(Cars93)
+
+attach(Cars93)
+summary(Price)
+price=cut(Price,c(0,12,20,max(Price)))
+price
+class(price)
+levels(price)
+
+levels(price)<-c("便宜","還好","太貴")
+levels(price)
+table(price)
+```
+
+```{r}
+f2=factor(rep(1:5,10))
+table(f2)
+```
+
+```{r}
+r2=rnorm(100)
+#r2個數100
+f3=factor(rep(1:5,20))
+#f3個數100
+#個數相同,才能畫圖
+par(mfrow=c(1,1))
+stripchart(r2~f3)
+boxplot(r2~f3)
+```
+
+```{r}
+r2=rnorm(100)
+#r2個數100
+f3=factor(rep(1:5,20))
+#f3個數100
+#個數相同,才能畫圖
+par(mfrow=c(1,1))
+stripchart(r2~f3)
+boxplot(r2~f3,horizontal = T)
+```
+
+```{r}
+par(mfrow=c(1,2))
+#一次呈現兩張圖在同一視窗
+stripchart(r2~f3)
+boxplot(r2~f3,horizontal = T)
+```
+
+
+#主題2
+先確認版本為4.0.3以後,執行指令
+install.packages("UsingR")
+library(UsingR)
+data(ewr)
+
+```{r}
+library(UsingR)
+```
+
+```{r}
+EDA <- function (x)
+{ 
+  par(mfrow=c(2,2))              
+  hist(x)                        
+  dotchart(x)                    
+  boxplot(x,horizontal=T)        
+  qqnorm(x);qqline(x)            
+  par(mfrow=c(1,1))              
+}
+
+pay=c(11,19,14,22,14,28,13,81,12,43,11,16,31,16,23,42,22,26,17,22,
+      13,27,108,16,43,82,14,11,51,76,28,66,29,14,14,65,37,16,37,35,
+      39,27,14,17,13,38,28,40,85,32,25,26,16,12,54,40,18,27,16,14,
+      33,29,77,50,19,34)
+EDA(pay)
+
+#想在第一張圖(histogram)裡再畫出一條直線的方法,請搜尋:r langue histogram plus normal curve,如下
+# https://stats.stackexchange.com/questions/125552/draw-a-histogram-with-normal-distribution-overlay
+```
+
+```{r}
+#利用script建立EDA的程式碼,要使用的時候再喚回即可
+source("EDA.R")
+```
+
+```{r}
+MS=read.csv("mathstat.csv",header=T)
+qqplot(MS$maths,MS$stats)
+#qqline(MS$maths)無法顯示...
+```
+
+```{r}
+rr<-runif(1000)
+MS=read.csv("mathstat.csv",header=T)
+qqplot(MS$maths,rr)
+```
+
+```{r}
+r1<-runif(1000)
+r2<-runif(2000)
+qqplot(r1,r2)
+#若兩筆數據皆來自相同的分配,則圖形會趨近一條直線
+```
+
+```{r}
+r1<-runif(1000)
+r2<-rnorm(2000)
+qqplot(r1,r2)
+```
+
