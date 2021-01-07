@@ -7,3 +7,175 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+#老師網站airbone4.github.io/blogR
+#https://airbone4.github.io/blogR/rlang/demo/ch7.html
+#class log>R language>暫時>chapter 7
+#下載教材檔案ch7
+
+```{r}
+#某公司宣稱生產的輪軸,直徑為5CM,標準差為1CM,如何確定是否為真?
+
+x<-c(3.801895,5.214785,5.445979,4.293448,7.401404,4.156799,6.029400,3.982314,3.605331,4.707879,4.087529,4.635022,5.597247,3.889285,6.268631,6.304441,5.565396,5.380210,1.754372,5.449418)
+u.test<-function(x,mu,thegma)#mu為平均數,thegma為標準差
+{  Se=thegma/sqrt(length(x))
+   u=(mean(x)-mu)/Se
+   p=pnorm(u)
+   list(u=u, p=p)
+}
+rst<-u.test(x,5,1)
+rst
+```
+```{r}
+#qnorm(0.975)為反查機率0.975的值
+#dnorm(x)為density密度,找對應x的機率
+m1<-qnorm(0.975)
+m2<-qnorm(0.025)
+m3<-qnorm(c(0.025,0.975))
+m1
+m2
+m3
+```
+
+```{r}
+#Z檢定
+m<-qnorm(0.975)
+m
+x <- seq(-4, 4, length=100)
+hx <- dnorm(x)
+plot(x,hx)
+plot(x,hx,"l")
+rug(c(-m,0,m),col="blue")
+rug(c(rst$u),col="red")
+```
+
+```{r}
+#hw1:Children’s IQ scores are normally distributed with a mean of 100 and a "standard deviation"(標準差) of 15. What proportion of children are expected to have an IQ between 80 and 120?
+#翻譯hw1:已知X~N(100,15),求(80,120)的區域機率?
+
+pnorm(80,100,15)
+pnorm(120,100,15)
+pnorm(120,100,15)-pnorm(80,100,15)
+```
+
+```{r}
+before = c(94.5,101,110,103.5,97,88.5,96.5,101,104,116.5)
+after = c(85,89.5,101.5,96,86,80.5,87,93.5,93,102)
+t.test(before,after,paired=T)
+```
+
+```{r}
+#需先喚回:library(nortest)
+#才能使用:lillie.test(before,after)
+```
+
+```{r}
+smokers  <- c( 83, 90, 129, 70 )
+patients <- c( 86, 93, 136, 82 )
+prop.test(smokers, patients)
+```
+
+```{r}
+#搭配檔案ch7第16頁7.4.2
+week1<-c(45,35)
+week2<-c(56,47)
+prop.test(week1,week2)
+#看p-value
+
+prop.test(c(45,56),c(45+35,56+47))
+#看p-value
+```
+
+#本章節經常使用的語法
+#要是有看到母體平均或是母體方差
+#z-test或chi-2
+#t-test或F-test
+
+```{r}
+x<-seq(0,40)
+y<-dchisq(x,11)
+plot(x,y)
+```
+
+```{r}
+x<-seq(0,40)
+y<-dchisq(x,11)
+plot(x,y,"l")
+```
+
+```{r}
+x<-seq(0,40)
+y<-dchisq(x,11)
+plot(x,y,"l")
+polygon(x,y)
+```
+
+```{r}
+x<-seq(0,40)
+y<-dchisq(x,11)
+plot(x,y,"l")
+polygon(x,y,col="red", border = NA)
+```
+
+```{r}
+#結論
+x<-seq(0,40)
+y<-dchisq(x,11)
+plot(x,y)
+plot(x,y,"l")
+polygon(x,y)
+polygon(x,y,col="red", border = NA)
+```
+
+```{r}
+x<-seq(0,40)
+y<-dchisq(x,df=10)
+
+i<-x>=20
+plot(x,y,"l")
+
+polygon(x[i],y[i],col="red", border = NA)
+```
+
+```{r}
+x<-seq(0,40)
+y<-dchisq(x,df=10)
+
+i<-x<20
+plot(x,y,"l")
+
+polygon(x[i],y[i],col="red", border = NA)
+```
+
+```{r}
+x<-seq(0,40)
+y<-dchisq(x,df=10)
+
+i<-x>=20
+plot(x,y,"l")
+
+polygon(c(x[i],rev(x[i])), c(y[i],rep(0,length(x[i]))), col="red", border = NA)
+#polygon的區域畫法是從P1, P2, ...,Pn(最後一點),再拉回"P1"(起點)
+#因此我們須產生一個作弊點Q(x[1],0)在最後的Pn與P1之間,如P1, P2, ...,Pn,"Q",P1,這樣就可以圍出我們想要的區域,如下
+
+#x座標為20~40,再從40~20繞回去
+#y座標為9.458319e-03~6.870512e-06(共21個),然後作弊點的y座標都是0(共21個)
+#第一個點為(20,9.458319e-0),第二個點為(21,6.973068e-03),第三個點為(22,5.094367e-03),...,第四十一個點為(21,0),第四十二個點為(20,0)
+
+```
+
+```{r}
+#第二種畫法,如果已經知道作弊點座標位置為(20,0)
+x<-seq(0,40)
+y<-dchisq(x,df=10)
+
+i<-x>=20
+plot(x,y,"l")
+
+polygon(c(x[i],20), c(y[i],0), col="red", border = NA)
+#與前一個作法的差別:只須設定一個作弊點座標(20,0),方便許多
+```
+
+
+
+
+
